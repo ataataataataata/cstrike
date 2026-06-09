@@ -9,12 +9,17 @@
 #include <time.h>
 #include <unistd.h>
 
+typedef struct {
+    double latency;
+    int status_code;
+} RequestResult;
+
 struct addrinfo *resolveHost(const char *url, const char *port);
 
 int connectToHost(const char *host, const char *port);
 
 int sendRequest(int sock, const char* host, const char* path);
 
-double doRequest(const char* host, const char* port, const char* path);
+RequestResult doRequest(const char* host, const char* port, const char* path);
 
 #endif //CSTRIKE_REQUEST_H
