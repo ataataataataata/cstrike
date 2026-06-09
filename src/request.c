@@ -33,3 +33,15 @@ int sendRequest(int sockfd, const char *host, const char *path) {
 
     return send(sockfd, request, strlen(request), 0);
 }
+
+double doRequest(const char* host, const char* port, const char* path) {
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
+    int sockfd = connectToHost(host, port);
+    sendRequest(sockfd,host,path);
+    char buffer[4096];
+    recv(sockfd, buffer, sizeof(buffer)-1, 0);
+    close(sockfd);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    return (end.tv_sec - start.tv_sec) * 1000.0+(end.tv_nsec - start.tv_nsec) / 1000000.0;
+}
