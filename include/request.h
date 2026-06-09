@@ -5,7 +5,11 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <string.h>
+#include <stdio.h>
 
 struct addrinfo *resolveHost(const char *url, const char *port);
 
+int connectToHost(const char *host, const char *port);
+
+int sendRequest(int sock, const char* host, const char* path);
 #endif //CSTRIKE_REQUEST_H
